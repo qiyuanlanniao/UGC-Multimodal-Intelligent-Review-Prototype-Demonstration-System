@@ -1,0 +1,235 @@
+/* frontend/css/style.css */
+:root {
+    --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+    --bg-dark: #0f172a;
+    --bg-medium: #1e293b;
+    --bg-light: rgba(30, 41, 59, 0.7);
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-teal: #5eead4;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --border-color: rgba(94, 234, 212, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(2, 8, 20, 0.4);
+    overflow: hidden;
+}
+
+.header {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.header p {
+    opacity: 0.9;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.content {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+@media (max-width: 768px) {
+    .content { grid-template-columns: 1fr; }
+}
+
+.left-panel { display: flex; flex-direction: column; gap: 20px; }
+.right-panel { display: flex; flex-direction: column; gap: 20px; }
+
+.mode-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--bg-light);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+.mode-tab {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-align: center;
+    font-size: 14px;
+    user-select: none;
+}
+.mode-tab.active {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+}
+.mode-tab:hover:not(.active) {
+    background: rgba(15, 23, 42, 0.5);
+    color: var(--text-primary);
+}
+
+.panel {
+    display: none;
+    background: rgba(30, 41, 59, 0.4);
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    min-height: 200px;
+}
+.panel.active { display: block; animation: fadeIn 0.4s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.upload-zone {
+    border: 3px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+.upload-zone:hover, .upload-zone.dragover {
+    border-color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.1);
+}
+.upload-icon { font-size: 48px; margin-bottom: 10px; }
+.upload-zone small { display: block; margin-top: 10px; color: var(--text-secondary); font-size: 12px; }
+
+input[type="file"] { display: none; }
+.preview {
+    margin-top: 15px;
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    display: none;
+    border: 1px solid var(--border-color);
+}
+.preview.show {
+    display: block;      /* 1. 确保元素是块级元素 */
+    margin-left: auto;   /* 2. 左外边距自动 */
+    margin-right: auto;  /* 3. 右外边距自动 */
+}
+
+.btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+    margin-top: 20px;
+}
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.loading { display: none; text-align: center; padding: 30px; }
+.loading.show { display: block; }
+.spinner { border: 4px solid rgba(30, 41, 59, 0.8); border-top: 4px solid #0ea5e9; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loading-detail { font-size: 12px; color: var(--text-secondary); margin-top: 10px; }
+
+.result-container { display: none; background: var(--bg-light); border-radius: 12px; padding: 25px; border: 1px solid var(--border-color); }
+.result-container.show { display: block; }
+.result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+.result-title { font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.risk-badge { padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.risk-safe { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; }
+.risk-warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; }
+.risk-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; }
+
+.result-section { margin-bottom: 25px; padding: 20px; background: rgba(15, 23, 42, 0.4); border-radius: 10px; border-left: 4px solid #0ea5e9; }
+.section-title { font-size: 16px; font-weight: 600; margin-bottom: 15px; color: #0ea5e9; display: flex; align-items: center; gap: 8px; }
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.detail-item { background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
+.detail-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+.detail-value { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+.placeholder { text-align: center; padding: 40px; color: var(--text-muted); }
+.placeholder-icon { font-size: 64px; margin-bottom: 20px; }
+.placeholder h3 { margin-bottom: 10px; color: var(--text-primary); }
+
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #0ea5e9, #7c3aed); }
+.timeline-item { position: relative; margin-bottom: 20px; padding: 15px; background: rgba(15, 23, 42, 0.6); border-radius: 8px; border: 1px solid var(--border-color); }
+.timeline-item::before { content: ""; position: absolute; left: -24px; top: 20px; width: 10px; height: 10px; border-radius: 50%; background: #0ea5e9; border: 2px solid #0f172a; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3); }
+.timestamp { font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
+
+/* 一致性指示器 */
+.consistency-indicator { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 8px; margin-top: 10px; }
+.consistency-high { background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; }
+.consistency-medium { background: rgba(245, 158, 11, 0.1); border: 1px solid #f59e0b; }
+.consistency-low { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; }
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .content { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: 1fr; }
+    .mode-tabs { flex-wrap: wrap; }
+}
+
+#text-input {
+    /* 核心：设置宽高 */
+    width: 100%;       /* 宽度占满父容器 */
+    height: 180px;     /* 设置一个合适的默认高度 */
+
+    /* 优化：匹配项目主题，提升美观度 */
+    background-color: rgba(15, 23, 42, 0.6); /* 使用主题的深色背景 */
+    color: var(--text-primary);              /* 使用主题的主要文字颜色 */
+    border: 1px solid var(--border-color);   /* 使用主题的边框颜色 */
+    border-radius: 10px;                     /* 圆角与整体风格保持一致 */
+    padding: 15px;                           /* 增加内边距，让文字不贴边 */
+    font-size: 16px;                         /* 设置一个易于阅读的字号 */
+    line-height: 1.6;                        /* 增加行高，提升可读性 */
+    resize: vertical;                        /* 允许用户垂直调整大小，防止破坏水平布局 */
+    transition: all 0.3s;                    /* 添加过渡效果 */
+}
+
+/* 当用户点击输入框时的样式 */
+#text-input:focus {
+    outline: none;                           /* 移除默认的蓝色轮廓 */
+    border-color: #0ea5e9;                   /* 高亮边框，使用主题强调色 */
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.3); /* 添加光晕效果 */
+}
+
+/* 设置占位符文字的颜色 */
+#text-input::placeholder {
+    color: var(--text-secondary);            /* 使用主题的次要文字颜色 */
+}

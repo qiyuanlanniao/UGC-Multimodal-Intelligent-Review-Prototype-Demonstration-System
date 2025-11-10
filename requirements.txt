@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-multipart
+torch==2.0.1
+transformers==4.28.1
+Pillow
+moviepy
+opencv-python-headless
+numpy==1.26.4
+easyocr
+openai-whisper
+selenium
+webdriver_manager
+librosa
+diffusers==0.21.4
+accelerate==0.18.0
